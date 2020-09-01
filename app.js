@@ -13,10 +13,11 @@ const { Router } = require('express');
 
 //--------------------Model end ----------//
 
-const app = express();
 
+const app = express();
+const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
-mongoose.connect(process.env.DB_STR, {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
         .then((result)=>{
             console.log('connected to Database');
         }).catch((err)=>{
