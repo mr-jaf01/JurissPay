@@ -1,0 +1,73 @@
+<div class="container animate__animated  animate__bounceInLeft">
+    <div class="row mt-2 mb-3">
+        <div class="col-md-12 logo">
+            <img src="/images/jurisPayB.png" >
+        </div>
+    </div>
+    <hr class="my-1 mb-3" />
+    <div class="row ">
+        <div class="col-md-12 login-content">
+            <h4 class="grey-text">Create wallet!</h4>
+        </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-md-12 white-text">
+          <%= info %>
+      </div>
+  </div>
+
+
+    <div class="row ">
+        <div class="col-md-12">
+            <form id="formInput" action="/auth/createWallet" method="POST">
+                <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-pencil  input-prefix"></i>
+                    <input type="text" id="suffixInside1" required name="fname" class="form-control">
+                    <label  for="suffixInside1">Full name</label>
+                  </div>
+
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-phone  input-prefix"></i>
+                    <input type="text" id="suffixInside2" required name="phone" class="form-control">
+                    <label  for="suffixInside2">Phone</label>
+                  </div>
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-envelope  input-prefix"></i>
+                    <input type="email"  id="suffixInside3" required name="email" class="form-control">
+                    <label  for="suffixInside3">Email</label>
+                  </div>
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-eye-slash  input-prefix"></i>
+                    <input type="password" id="suffixInside4" required name="password" class="form-control">
+                    <label  for="suffixInside4">Password</label>
+                  </div>
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-eye-slash  input-prefix"></i>
+                    <input type="password" id="suffixInside5" required name="cpassword" class="form-control">
+                    <label  for="suffixInside5">Re-Enter Password</label>
+                  </div>
+
+
+                  <div class="button">
+                    <button class="btn waves-effect btn-outline-orange ">Create wallet</button>
+                  </div>
+
+                  <!---
+                     <div class="button">
+                    <a style=" border-color:#ff6a14;" class="btn  btn-outline-orange waves-effect" href="/">Login</a>
+                  </div>
+                  ->
+                -->    
+            </form>
+            <div class="forgot mt-4">
+              <span class="grey-text">Do you Have wallet? <a href='/auth/login'>Login</a></span>
+              
+          </div>
+        </div>
+    </div>
+</div>

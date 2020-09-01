@@ -1,0 +1,50 @@
+<div class="container  animate__animated  animate__bounceInLeft ">
+    <div class="row mt-2 mb-5">
+        <div class="col-md-12 logo">
+            <img src="/images/jurisPayB.png" >
+        </div>
+    </div>
+    <hr class="my-1 mb-4" />
+
+    <div class="row ">
+        <div class="col-md-12 login-content">
+            <h4 class="grey-text">Login</h4>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-12 login-content white-text">
+            <%= info %> 
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-12 ">
+            <form id="formInput" action="/auth/login" method="POST">
+                <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-user  input-prefix"></i>
+                    <input type="text" id="suffixInside1" required name="emphone" class="form-control">
+                    <label  for="suffixInside1">Email or Phone</label>
+                  </div>
+
+                  <div id="input" class="in md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-eye-slash  input-prefix"></i>
+                    <input  type="password" id="suffixInside2" required name="pass" class="form-control">
+                    <label for="suffixInside2">Password</label>
+                  </div>
+
+                  <div class="button">
+                    <button class="btn waves-effect btn-outline-orange ">Login</button>
+                  </div>
+
+                 
+    
+            </form>
+            <div class="forgot mt-4">
+                <span class="grey-text">Don't have Wallet? <a href='/auth/createWallet'>Create Wallet</a></span>
+                <a href="/auth/resetpassword">Forgot Password?</a>
+            </div>
+                  
+        </div>
+    </div>
+</div>

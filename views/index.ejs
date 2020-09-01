@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>JurissPay.io</h4>
+            <hr class="my-1">
+            <h5><%= sta %> </h5>
+            <form action="/recharge" method="POST">
+                <div>
+                    <h6>Network Type</h6>
+                    <select name="np" class="form-control" >
+                        <option value="MTN">MTN</option>
+                        <option value="Airtel">Airtel</option>
+                        <option value="Glo">Glo</option>
+                        <option value="9mobile">9mobile</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h6>Phone Number</h6>
+                    <input type="text" name="phoneNum" placeholder="Phone Number" class="form-control"  />
+                </div>
+
+                <div>
+                    <h6>Amount</h6>
+                    <input type="text" name="amount" placeholder="amount"  class="form-control" />
+                </div>
+
+                <div>
+                    <button class="btn btn-green" name="rgn">Recharge Now</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <%  %> 
+    </div>
+</div>
