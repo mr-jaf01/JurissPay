@@ -5,13 +5,13 @@
     "icons":[
 
        {
-           "src":"images/jurisPayB.png",
+           "src":"./images/jurisPayB.png",
            "type":"image/png",
            "sizes":"96x96"
        },
 
        {
-           "src":"images/jurisPayB.png",
+           "src":"./images/jurisPayB.png",
            "type":"image/png",
            "sizes":"192x192"
            
