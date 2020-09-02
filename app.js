@@ -41,7 +41,6 @@ app.get('/', (req,res)=>{
     }
 });
 
-
 app
 .route('/auth/login')
 .get((req,res)=>{
@@ -60,11 +59,22 @@ app
 app
 .route('/auth/createWallet')
 .get((req,res)=>{
-    res.render('signup/signup',{info:req.query.callback});
+    if(session.walletID){
+        res.redirect('/auth/login');
+    }else{
+        res.render('signup/signup',{info:req.query.callback});
+    }
+    
 })
 .post((req,res)=>{
     Authen.NewWallet(req,res);
 });
+
+app.get('/auth/logout', (req,res)=>{
+    session.walletID = '';
+    res.redirect('/auth/login');
+});
+
 
 
 app.get('/dashboard', (req,res)=>{
@@ -81,6 +91,7 @@ app.get('/dashboard', (req,res)=>{
         
     }
 });
+
 
 
 
