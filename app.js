@@ -5,15 +5,11 @@ const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const Authen = require('./tools/Authenticate');
 const { Router } = require('express');
-//const bcrypt = require('bcrypt');
-//const saltRounds = 10;
-
 //--------------- DB Models Import-------//
+const wallet = require('./models/wallets');
 //const customer = require('./models/customers');
 
 //--------------------Model end ----------//
-
-
 const app = express();
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
@@ -36,16 +32,25 @@ app.use(layouts);
 
 
 
-///App Route-------//////
-
+///------------App Route----------//////
 app.get('/', (req,res)=>{
-    res.render('login/login',{info:req.query.info});
+    if(session.walletID){
+        res.redirect('/dashboard');
+    }else{
+        res.render('login/login', {info:req.query.info});
+    }
 });
+
 
 app
 .route('/auth/login')
 .get((req,res)=>{
-    res.render('login/login', {info:req.query.info});
+    if(session.walletID){
+        res.redirect('/dashboard');
+    }else{
+        res.render('login/login', {info:req.query.info});
+    }
+    
 })
 .post((req,res)=>{
     Authen.WalletLogin(req,res);
@@ -62,13 +67,25 @@ app
 });
 
 
-
+app.get('/dashboard', (req,res)=>{
+    if(session.walletID){
+        wallet.find({wallet:session.walletID})
+        .then((result)=>{
+            res.render('dashboard/wallet',{walletinfo:result});
+        }).catch((err)=>{
+            console.log(err);
+        });
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
 
 
 
 
 ///------------------------------///
-
 ///------------------Port Listen----------////
 app.listen(process.env.PORT, ()=>{
     console.log('JurissPay Server Started');

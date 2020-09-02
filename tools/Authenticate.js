@@ -62,7 +62,8 @@ const WalletLogin = (req, res)=>{
         }).then((result)=>{
             bcrypt.compare(pass, result.password, (err, done)=>{
                 if(done){
-                    console.log('Password Match! Login Successfully');
+                    session.walletID = result.wallet;
+                    res.redirect('/dashboard')
                 }else{
                     res.redirect('/auth/login?info=Incorrect Wallet Password');
                     console.log('Wrong password');
