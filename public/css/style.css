@@ -56,8 +56,38 @@ hr{
     border-color: grey;
 }
 
+.dashboard-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #03030d;
+}
+.dashboard-header img{
+    height: 50px;
+   
+}
+.dashboard-header a{
+    color: white;
+}
+.balance{
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    color: grey;
+    height: 250px;
+}
 
-
+.menu{
+    background-color: #03030d;
+    border-radius: 19px;
+    height: 340px;
+}
+.menu-p{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 
 
