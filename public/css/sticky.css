@@ -37,8 +37,6 @@ body{
 }
 
 .footer-app a i{
-    color:white;
-    
     display: flex;
     flex-direction: column;
    align-items: center;

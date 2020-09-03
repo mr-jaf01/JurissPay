@@ -60,7 +60,7 @@ hr{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #03030d;
+    background-color: #0a0112;
 }
 .dashboard-header img{
     height: 50px;
@@ -79,20 +79,37 @@ hr{
 }
 
 .menu{
-    background-color: #03030d;
-    border-radius: 19px;
-    height: 340px;
+    background-color: #131415;
 }
 .menu-p{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 5px;
+   
 }
 .menu-p a{
     color: white;
 }
 
-
+.service a i{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   color: #ff6a14;
+}
+.col-sm-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: -40px;
+}
+.service a{
+    color: #ff6a14;
+    
+}
 
 
 
