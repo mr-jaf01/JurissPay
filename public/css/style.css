@@ -62,10 +62,15 @@ hr{
     justify-content: space-between;
     background-color: #0a0112;
 }
-.dashboard-header img{
-    
+.logo-banner{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
-   
+.logo-banner img{
+    height: 90px;
+    
 }
 .dashboard-header a{
     color: white;
