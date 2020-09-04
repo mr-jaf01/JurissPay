@@ -13,10 +13,10 @@
     </div>
  
     <div class="row">
-        <div class="col-md-12 balance">
-           <span>Welcome! <h5>Abdullahi jafar Musa</h5></span>
+        <div class="col-md-12 balance white-text">
            <% walletinfo.forEach((wallet)=>{ %>
-            <span>Acc Number:<%= wallet.wallet %> </span>
+            <span>Welcome! <h5><%= wallet.fname %> </h5></span>
+            <span>Acc Number: <%= wallet.wallet %> </span>
            <% }) %>   
            <h6><span>Bal:</span> N 500,000.09 </h6>
            <div class="top-wallet">
