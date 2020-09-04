@@ -78,10 +78,9 @@ hr{
 .balance{
     display: flex;
     flex-direction: column;
-    
     align-items: center;
     color: grey;
-    height: 250px;
+    
 }
 
 .service img{
@@ -93,6 +92,7 @@ hr{
     border-radius: 19px;
     margin:5px;
     padding: 10px;
+    margin-bottom: 80px;
 }
 .menu-p{
     display: flex;
@@ -103,9 +103,20 @@ hr{
     color: grey;
 }
 
-.active{
-    color: #ff6a14;
+.top-wallet{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 19px;
+    margin:20px;
+    border: 1px solid grey;
+    height: 100px;
 }
+.top-wallet a i{
+    display: flex;
+    flex-direction: column;
+}
+
 
 /*media query styling below*/
 @media(min-width:768px){
