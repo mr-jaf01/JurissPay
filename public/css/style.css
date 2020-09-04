@@ -88,6 +88,12 @@ hr{
     height: 60px;
     width: 80px;
 }
+.service{
+    border: 1px solid grey;
+    border-radius: 19px;
+    margin:5px;
+    padding: 10px;
+}
 .menu-p{
     display: flex;
     justify-content: space-between;
@@ -95,6 +101,10 @@ hr{
 }
 .menu-p a{
     color: grey;
+}
+
+.active{
+    color: #ff6a14;
 }
 
 /*media query styling below*/
