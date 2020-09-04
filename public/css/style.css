@@ -78,41 +78,18 @@ hr{
     height: 250px;
 }
 
-.menu{
-    background-color: #131415;
+.service img{
+    height: 60px;
+    width: 80px;
 }
 .menu-p{
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 5px;
-   
+    color: #ff6a14;
 }
 .menu-p a{
-    color: white;
+    color: grey;
 }
-
-.service a i{
-    display: flex;
-    flex-direction: column;
-   align-items: center;
-   color: #ff6a14;
-}
-.col-sm-3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding-top: -40px;
-}
-.service a{
-    color: #ff6a14;
-    
-}
-
-
-
 
 /*media query styling below*/
 @media(min-width:768px){
