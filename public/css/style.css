@@ -1,4 +1,6 @@
 *{
+    margin: 0px;
+    padding: 0px;
     text-decoration:none;
 }
 body{
@@ -117,11 +119,35 @@ hr{
     flex-direction: column;
 }
 
+/*styles for transaction UI*/
+.top-nav{
+    padding-top: 8px;
+}
+.top-nav span{
+    color: white;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 12px;
+    font-size: 19px;
+}
+
+.back-btn{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 12px;
+    background-color: #131415;
+    color: white;
+    margin-left: -14px;
+}
+
+/*styles for transaction UI end*/
+
+
 
 /*media query styling below*/
 @media(min-width:768px){
-    .container{
-         max-width: 400px;
+    .container-fluid{
+         max-width: 100%;
          margin: auto;
     }
 }

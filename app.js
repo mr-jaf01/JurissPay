@@ -76,7 +76,6 @@ app.get('/auth/logout', (req,res)=>{
 });
 
 
-
 app.get('/dashboard', (req,res)=>{
     if(session.walletID){
         wallet.find({wallet:session.walletID})
@@ -91,6 +90,81 @@ app.get('/dashboard', (req,res)=>{
         
     }
 });
+
+app.get('/services/transactions', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/transaction');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/update', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/update');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/top-up', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/topup');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/cash-out', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/cashout');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/quickPay', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/quickpay');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/manageCards', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/cards');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/support', (req, res)=>{
+    if(session.walletID){
+        res.render('dashboard/help');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+
+
+
+
 
 
 
