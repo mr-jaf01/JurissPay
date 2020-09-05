@@ -40,23 +40,92 @@ const NewWallet = function(req,res){
                 if(result === null){
                     newCus.save()
                     .then((result)=>{
+                        const output = `
+                        <div class="row" style=" margin-bottom:100px; padding-left:20px; padding-right:20px; height:100%; display: flex; padding-top: 30px; flex-direction: column; align-items: center;">
+                        <style>
+                            
+                .table {
+                  width: 100%;
+                  margin-bottom: 1rem;
+                  color: #212529;
+                }
+                
+                .table th,
+                .table td {
+                  padding: 0.75rem;
+                  vertical-align: top;
+                  border-top: 1px solid #dee2e6;
+                }
+                
+                .table thead th {
+                  vertical-align: bottom;
+                  border-bottom: 2px solid #dee2e6;
+                }
+                
+                .table tbody + tbody {
+                  border-top: 2px solid #dee2e6;
+                }
+                
+                .table-sm th,
+                .table-sm td {
+                  padding: 0.3rem;
+                }
+                
+                .table-bordered {
+                  border: 1px solid #dee2e6;
+                }
+                
+                .table-bordered th,
+                .table-bordered td {
+                  border: 1px solid #dee2e6;
+                }
+                
+                .table-bordered thead th,
+                .table-bordered thead td {
+                  border-bottom-width: 2px;
+                }
+                
+                        </style>
+                        <div>
+                            <img src="https://jurisspay.herokuapp.com/images/jPayww.png" width="200" />
+                        </div>
+                        <h4 style="margin-top: 10px; ">Wallet Account Details</h4>
+                        <div>
+                            <table class="table table-bordered" style="">
+                                <tr>
+                                    <td>Wallet Account Number</td>
+                                    <td>${result.wallet}</td>
+                                </tr>
+                                <tr>
+                                    <td>Wallet Account Name</td>
+                                    <td >${result.fname}</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>Email</td>
+                                    <td >${result.email}</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>Phone</td>
+                                    <td >${result.phone}</td>
+                                </tr>
+                            </table>
+                        </div>
+                       
+                        <div style="">
+                            <center><p>Support: <br> https://jurisspay.herokuapp.com/</p></center>
+                            <center><p>Contacts:<br> +2348132911690, +2348086587066</p></center>
+                        </div>
+                        
+                    </div>
+                        `;
                         const mailOption = {
                             from: process.env.ENAME,
                             to:email,
                             subject:'Thanks You For Signing Up with JurissPay.io',
-                            text: `
-                                Congratulations!
-                                    Welcome to JurissPay.io, Start enjoying fee free Transactions
-
-                                    Wallet Details Below!
-
-                                    Wallet Account Number:    ${result.wallet}
-                                    Wallet FullName:          ${result.fname}
-                                    Phone Number:             ${result.phone}
-                                    Email:                    ${result.email}
-                                    CreatedOn:                ${result.createdOn}
-
-                            `
+                            text: '',
+                            html:output
                         }
                         transporter.sendMail(mailOption)
                         .then((done)=>{
