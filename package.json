@@ -18,10 +18,10 @@
     "express-session": "^1.17.1",
     "flutterwave-node-v3": "^1.0.0",
     "mongoose": "^5.10.2",
+    "nodemailer": "^6.4.11",
     "request": "^2.88.2"
   },
-
- "engines": {
+  "engines": {
     "node": "14.8.0"
   }
 }

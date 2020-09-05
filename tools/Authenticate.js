@@ -1,5 +1,14 @@
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service:'gmail',
+    auth:{
+        user:process.env.ENAME,
+        pass:process.env.EPASS
+    }
+});
 //--------------- DB Models Import-------//
 const Wallet = require('../models/wallets');
 const saltRounds = 10;
@@ -31,7 +40,30 @@ const NewWallet = function(req,res){
                 if(result === null){
                     newCus.save()
                     .then((result)=>{
-                        console.log('Wallet Created');
+                        const mailOption = {
+                            from: process.env.ENAME,
+                            to:email,
+                            subject:'Thanks You For Signing Up with JurissPay.io',
+                            text: `
+                                Congratulations!
+                                    Welcome to JurissPay.io, Start enjoying fee free Transactions
+
+                                    Wallet Details Below!
+
+                                    Wallet Account Number:    ${result.wallet}
+                                    Wallet FullName:          ${result.fname}
+                                    Phone Number:             ${result.phone}
+                                    Email:                    ${result.email}
+                                    CreatedOn:                ${result.createdOn}
+
+                            `
+                        }
+                        transporter.sendMail(mailOption)
+                        .then((done)=>{
+                            console.log('Email Send Successfully');
+                        }).catch((err)=>{
+                            console.log('Email Not Send');
+                        });
                         res.redirect('/auth/login?info=Wallet Created!');
                     }).catch((err)=>{
                         console.log(err);
