@@ -156,27 +156,30 @@ const NewWallet = function(req,res){
 
 // Wallet Login 
 const WalletLogin = (req, res)=>{
+
     const email = req.body.emphone;
     const pass = req.body.pass;
         Wallet.findOne({
             $or:[{email:email},{phone:email}]
         }).then((result)=>{
+         
             bcrypt.compare(pass, result.password, (err, done)=>{
                 if(done){
-                    session.walletID = result.wallet;
-                    res.redirect('/dashboard')
+                    req.session.walletID = result.wallet;
+                    res.redirect('/dashboard'); 
                 }else{
                     res.redirect('/auth/login?info=Incorrect Wallet Password');
                     console.log('Wrong password');
                 }
-
+ 
             });
-
+ 
            
         }).catch((err)=>{
             console.log('User not Found!');
             res.redirect('/auth/login?info=Wallet not Found!');
         });
+   
 }
 
 // -----------exported functions ---------///

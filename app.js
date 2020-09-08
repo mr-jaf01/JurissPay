@@ -5,8 +5,12 @@ const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const Authen = require('./tools/Authenticate');
 const { Router } = require('express');
+const lifetime = 1000 * 60 * 60 *2;
+const Sess_name = 'sid';
+
 //--------------- DB Models Import-------//
 const wallet = require('./models/wallets');
+
 //const customer = require('./models/customers');
 
 //--------------------Model end ----------//
@@ -22,10 +26,21 @@ mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
 //--------------------//
 
 ///-----------app middleware------------// 
+app.use(session({
+    name : Sess_name,
+    resave:false,
+    saveUninitialized:false,
+    secret: process.env.SESSION_KEY,
+    cookie:{
+        //name:'session',
+        maxAge: lifetime,
+        sameSite: true,
+        secure: false   
+    }
+}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
-app.use(session({secret:process.env.SESSION_KEY, resave:false, saveUninitialized:true}));
 app.use(layouts);
 
 ///------------------------------//
@@ -34,7 +49,7 @@ app.use(layouts);
 
 ///------------App Route----------//////
 app.get('/', (req,res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.redirect('/dashboard');
     }else{
         res.render('login/login', {info:req.query.info});
@@ -44,7 +59,7 @@ app.get('/', (req,res)=>{
 app
 .route('/auth/login')
 .get((req,res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.redirect('/dashboard');
     }else{
         res.render('login/login', {info:req.query.info});
@@ -52,14 +67,15 @@ app
     
 })
 .post((req,res)=>{
-    Authen.WalletLogin(req,res);
+   Authen.WalletLogin(req,res);
+  
 });
 
 
 app
 .route('/auth/createWallet')
 .get((req,res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.redirect('/auth/login');
     }else{
         res.render('signup/signup',{info:req.query.callback});
@@ -71,19 +87,26 @@ app
 });
 
 app.get('/auth/logout', (req,res)=>{
-    session.walletID = '';
-    res.redirect('/auth/login');
+    req.session.destroy(err =>{
+        if(err){
+            res.redirect('/dashboard');
+        }else{
+            res.clearCookie(Sess_name);
+            res.redirect('/auth/login');
+        }
+    });
 });
 
 
 app.get('/dashboard', (req,res)=>{
-    if(session.walletID){
-        wallet.find({wallet:session.walletID})
-        .then((result)=>{
-            res.render('dashboard/wallet',{walletinfo:result});
-        }).catch((err)=>{
-            console.log(err);
-        });
+    if(req.session.walletID){
+        wallet.find({wallet:req.session.walletID})
+            .then((result)=>{
+                res.render('dashboard/wallet', {walletinfo:result});
+            }).catch((err)=>{
+                console.log(err);
+            })
+        
     }else{
         res.redirect('/auth/login');
         console.log('Please Login to wallet');
@@ -92,7 +115,7 @@ app.get('/dashboard', (req,res)=>{
 });
 
 app.get('/services/transactions', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/transaction');
     }else{
         res.redirect('/auth/login');
