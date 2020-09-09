@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row" style="background-color: #131415;">
+        <div class="col-md-12">
+            <p class="top-nav"><a href="/dashboard" class="back-btn"><i class="fas fa-arrow-left"></i></a>| <span>Send Money</span></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <div class="account-details">
+                <p class="grey-text">Enter Account Number</p>
+                <form id="formInput" action="/services/transfer/jpay" method="POST">
+                    <div class="md-form md-outline input-with-post-icon">
+                        <i  class="fa fa-user  input-prefix"></i>
+                        <input type="text" id="suffixInside1" required name="accnumber" class="form-control">
+                        <label  for="suffixInside1">Account Number</label>
+                      </div>
+    
+                      <div class="btn-next">
+                        <a href="/dashboard" class="btn btn-danger waves-effect">CANCEL</a>  
+                        <button class="btn btn-green waves-effect ">NEXT</button>
+                      </div>
+    
+                     
+        
+                </form>
+                <div class="mt-5">
+                    <h4 class="red-text text-center"><%= info %> </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/stick.ejs');  %> 

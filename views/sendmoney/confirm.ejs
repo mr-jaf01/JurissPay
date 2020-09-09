@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row" style="background-color: #131415;">
+        <div class="col-md-12">
+            <p class="top-nav"><a href="/services/transfer/jpay/" class="back-btn"><i class="fas fa-arrow-left"></i></a>| <span>Confirm Transaction</span></p>
+
+        </div>
+    </div>
+
+    <div class="row mb-">
+        <div class="col-md-12 balance white-text">
+            <h3 style='color:#ff6a14'>Sending to</h3>
+            <span><i class="fa fa-user fa-3x"></i></span>
+           <% %>
+            <span>Wallet Name: <%= AccDetails.fname %> </span>
+            <h6><span>Wallet Account Number:</span>  <%= AccDetails.wallet  %>  </h6>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form id="formInput" action="/services/transfer/jpay/confirm" method="POST">
+                <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-user  input-prefix"></i>
+                    <input type="text" id="suffixInside1" required name="amt" class="form-control">
+                    <label  for="suffixInside1">Enter Amount</label>
+                  </div>
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-user  input-prefix"></i>
+                    <input type="text" value="<%= AccDetails.wallet %> " hidden id="suffixInside2" required name="accnumber" class="form-control">
+                    <label  for="suffixInside2"></label>
+                  </div>
+
+                  <div class="btn-next">
+                    <a href="/dashboard" class="btn btn-danger waves-effect">CANCEL</a>  
+                    <button class="btn btn-green waves-effect ">CONFIRM</button>
+                  </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>

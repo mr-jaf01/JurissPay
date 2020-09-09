@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
-const CustomerScheme = mongoose.Schema({
-    fname:{
+const transfer = mongoose.Schema({
+    fromwalletid:{
         type: String,
         required:true
     },
 
-    phone:{
+    amount:{
         type: String,
         required:true
     },
 
-    email:{
+    towalletid:{
         type: String,
         required:true
     },
 
-    address:{
-        type: String
+    date:{
+        type:Date,
+        required:true
     },
 
-    password:{
+    reference:{
         type: String,
         required:true
     },
@@ -39,5 +40,4 @@ const CustomerScheme = mongoose.Schema({
     }
 
 });
-
-module.exports = mongoose.model('wallets', CustomerScheme);
+module.exports = mongoose.model('tranfers', transfer);

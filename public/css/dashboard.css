@@ -1,0 +1,14 @@
+.sendmoney{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-next{
+   display: flex;
+   justify-content: space-between; 
+}
+.confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -93,10 +93,10 @@ app.get('/auth/logout', (req,res)=>{
         }else{
             res.clearCookie(Sess_name);
             res.redirect('/auth/login');
+            console.log('Logout Successfully');
         }
     });
 });
-
 
 app.get('/dashboard', (req,res)=>{
     if(req.session.walletID){
@@ -114,6 +114,67 @@ app.get('/dashboard', (req,res)=>{
     }
 });
 
+//--------------- Send Money Services Routes------------------------//
+app.get('/services/sendmoney', (req,res)=>{
+    if(req.session.walletID){
+        res.render('sendmoney/sendmoney');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+});
+
+app.route('/services/transfer/jpay')
+.get( (req,res)=>{
+    if(req.session.walletID){
+        res.render('sendmoney/jpay', {info:req.query.callback});
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+})
+.post((req,res)=>{
+    const acc_num = req.body.accnumber;
+    wallet.findOne({wallet:acc_num})
+        .then((result)=>{
+            res.redirect('/services/transfer/jpay/confirm?wid='+result.id);
+        }).catch((err)=>{
+            //res.redirect('/services/transfer/jpay?callback=Oops! Wallet Account Not Found');
+            console.log(err);
+        })
+});
+
+
+app.route('/services/transfer/jpay/confirm')
+.get((req,res)=>{
+    if(req.session.walletID){
+        wallet.findById(req.query.wid)
+        .then((result)=>{
+            res.render('sendmoney/confirm', {AccDetails:result});
+        }).catch((err)=>{
+          res.redirect('/services/transfer/jpay?callback=Oops! Wallet Account Not Found');  
+        })
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+})
+.post((req,res)=>{
+    console.log(req.body);
+    console.log(req.session.walletID);
+});
+//--------------- Send Money Services Routes end Here------------------------//
+
+
+
+
+
+
+
+
 app.get('/services/transactions', (req, res)=>{
     if(req.session.walletID){
         res.render('dashboard/transaction');
@@ -125,7 +186,7 @@ app.get('/services/transactions', (req, res)=>{
 });
 
 app.get('/services/update', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/update');
     }else{
         res.redirect('/auth/login');
@@ -135,7 +196,7 @@ app.get('/services/update', (req, res)=>{
 });
 
 app.get('/services/top-up', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/topup');
     }else{
         res.redirect('/auth/login');
@@ -145,7 +206,7 @@ app.get('/services/top-up', (req, res)=>{
 });
 
 app.get('/services/cash-out', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/cashout');
     }else{
         res.redirect('/auth/login');
@@ -155,7 +216,7 @@ app.get('/services/cash-out', (req, res)=>{
 });
 
 app.get('/services/quickPay', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/quickpay');
     }else{
         res.redirect('/auth/login');
@@ -165,7 +226,7 @@ app.get('/services/quickPay', (req, res)=>{
 });
 
 app.get('/services/manageCards', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/cards');
     }else{
         res.redirect('/auth/login');
@@ -175,7 +236,7 @@ app.get('/services/manageCards', (req, res)=>{
 });
 
 app.get('/services/support', (req, res)=>{
-    if(session.walletID){
+    if(req.session.walletID){
         res.render('dashboard/help');
     }else{
         res.redirect('/auth/login');

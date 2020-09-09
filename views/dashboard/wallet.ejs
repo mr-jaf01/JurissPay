@@ -15,9 +15,10 @@
         <div class="col-md-12 balance white-text">
             <span><i class="fa fa-user fa-3x"></i></span>
            <% walletinfo.forEach((wallet)=>{ %>
-            <span>Acc Number: <%= wallet.wallet %> </span>
+            <span>Account Number: <%= wallet.wallet %> </span>
+            <h6><span>Bal:</span> N <%= wallet.fund  %>  </h6>
            <% }) %>   
-           <h6><span>Bal:</span> N 500,000.09 </h6>
+          
         </div>
     </div>
 
@@ -39,7 +40,7 @@
     
     <div class="row service animate__animated animate__rotateIn ">
         <div class="col-md-4 col-4 mb-5">
-            <center><a href="/service/sendmoney"><img src="/images/icons/sendmoney.jpg" ></a></center> 
+            <center><a href="/services/sendmoney"><img src="/images/icons/sendmoney.jpg" ></a></center> 
         </div>
 
         <div class="col-md-4 col-4 mb-5" >
