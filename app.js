@@ -163,8 +163,7 @@ app.route('/services/transfer/jpay/confirm')
     } 
 })
 .post((req,res)=>{
-    console.log(req.body);
-    console.log(req.session.walletID);
+    
 });
 //--------------- Send Money Services Routes end Here------------------------//
 
