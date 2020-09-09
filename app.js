@@ -3,17 +3,26 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const layouts = require('express-ejs-layouts');
 const session = require('express-session');
-const Authen = require('./tools/Authenticate');
 const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
 
+
+
 //--------------- DB Models Import-------//
 const wallet = require('./models/wallets');
-
-//const customer = require('./models/customers');
-
 //--------------------Model end ----------//
+
+
+//----------------------Services Tools models ----------//
+const Authen = require('./tools/Authenticate');
+const transact = require('./tools/transact');
+//-------------------------end service tolls here------------//
+
+
+
+
+
 const app = express();
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
@@ -163,7 +172,17 @@ app.route('/services/transfer/jpay/confirm')
     } 
 })
 .post((req,res)=>{
-    
+    transact.transferfunc(req,res, req.session.walletID, req.body.accnumber,req.body.amt);
+});
+
+app.get('/services/transfer/jpay/error', (req,res)=>{
+    if(req.session.walletID){
+       res.render('sendmoney/error', {info:req.query.callback});
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
 });
 //--------------- Send Money Services Routes end Here------------------------//
 
