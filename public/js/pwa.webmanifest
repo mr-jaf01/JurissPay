@@ -18,9 +18,9 @@
        },
 
        {
-        "src":"jPay.jpg",
-        "type":"image/jpg",
-        "sizes":"256x256"
+            "src":"jPay.jpg",
+            "type":"image/jpg",
+            "sizes":"256x256"
         
         },
         {
