@@ -38,7 +38,7 @@
 
     "start_url":"/",
     "display":"standalone",
-    "background_color":"white",
+    "background_color":"#0a0112",
     "theme_color":"#ff6a14",
     "scope":"/"
 }
