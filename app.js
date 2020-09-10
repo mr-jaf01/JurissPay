@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const layouts = require('express-ejs-layouts');
 const session = require('express-session');
-var enforce = require('express-sslify');
+//const enforce = require('express-sslify');
 const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
@@ -26,7 +26,7 @@ const transact = require('./tools/transact');
 
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })

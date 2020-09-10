@@ -29,6 +29,6 @@
     "start_url":"/",
     "display":"standalone",
     "background_color":"#0a0112",
-    "theme_color":"#ff6a14",
+    "theme_color":"#0a0112",
     "scope":"/"
 }
