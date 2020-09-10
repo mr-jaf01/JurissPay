@@ -11,6 +11,7 @@ const Sess_name = 'sid';
 
 //--------------- DB Models Import-------//
 const wallet = require('./models/wallets');
+const transfer_transact = require('./models/transfer_transact');
 //--------------------Model end ----------//
 
 
@@ -32,6 +33,7 @@ mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
         }).catch((err)=>{
             console.log('Cannot Connect to DBserver');
 });
+mongoose.set('useFindAndModify', false);
 //--------------------//
 
 ///-----------app middleware------------// 
@@ -123,6 +125,7 @@ app.get('/dashboard', (req,res)=>{
     }
 });
 
+
 //--------------- Send Money Services Routes------------------------//
 app.get('/services/sendmoney', (req,res)=>{
     if(req.session.walletID){
@@ -150,11 +153,9 @@ app.route('/services/transfer/jpay')
         .then((result)=>{
             res.redirect('/services/transfer/jpay/confirm?wid='+result.id);
         }).catch((err)=>{
-            //res.redirect('/services/transfer/jpay?callback=Oops! Wallet Account Not Found');
-            console.log(err);
+            res.redirect('/services/transfer/jpay?callback=Oops! Wallet Account Not Found');
         })
 });
-
 
 app.route('/services/transfer/jpay/confirm')
 .get((req,res)=>{
@@ -172,7 +173,10 @@ app.route('/services/transfer/jpay/confirm')
     } 
 })
 .post((req,res)=>{
-    transact.transferfunc(req,res, req.session.walletID, req.body.accnumber,req.body.amt);
+    const fromwallet = req.session.walletID;
+    //const towallet = req.body.accnumber;
+    const amt = req.body.amt;
+    transact.transferfunc(req,res, fromwallet, amt);
 });
 
 app.get('/services/transfer/jpay/error', (req,res)=>{
@@ -184,6 +188,18 @@ app.get('/services/transfer/jpay/error', (req,res)=>{
         
     } 
 });
+
+app.get('/services/transfer/jpay/success', (req,res)=>{
+    if(req.session.walletID){
+       res.render('sendmoney/success', {info:req.query.callback});
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+});
+
+
 //--------------- Send Money Services Routes end Here------------------------//
 
 
@@ -192,10 +208,16 @@ app.get('/services/transfer/jpay/error', (req,res)=>{
 
 
 
-
+//---------------services Routes here----------//
 app.get('/services/transactions', (req, res)=>{
     if(req.session.walletID){
-        res.render('dashboard/transaction');
+        transfer_transact.find({
+            $or:[{fromwalletid:req.session.walletID},{towallet:req.session.walletID}]
+        }).then((result)=>{
+            res.render('dashboard/transaction');
+        }).catch((err)=>{
+            console.log(err);
+        })
     }else{
         res.redirect('/auth/login');
         console.log('Please Login to wallet');
@@ -262,7 +284,16 @@ app.get('/services/support', (req, res)=>{
         
     }
 });
-
+app.get('/services/wallet-profile', (req,res)=>{
+    if(req.session.walletID){
+        res.render('dashboard/profile');
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+//------------services Routes End here-----------//
 
 
 

@@ -31,7 +31,7 @@ const NewWallet = function(req,res){
                 address:'',
                 password:hash,
                 wallet:wallet_id,
-                fund:'0.00',
+                fund: 0.00,
                 createdOn:Date.now()
             });
             // checking if wallet Exites with Register Email or Phone

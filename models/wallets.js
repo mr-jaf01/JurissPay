@@ -30,7 +30,7 @@ const CustomerScheme = mongoose.Schema({
     },
 
     fund:{
-        type: String,
+        type: Number,
         required:true
     },
     

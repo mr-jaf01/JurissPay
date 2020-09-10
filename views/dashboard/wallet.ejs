@@ -13,10 +13,10 @@
  
     <div class="row">
         <div class="col-md-12 balance white-text">
-            <span><i class="fa fa-user fa-3x"></i></span>
+            <a href="/services/wallet-profile" class="white-text"><i class="fa fa-user fa-3x"></i></a>
            <% walletinfo.forEach((wallet)=>{ %>
             <span>Account Number: <%= wallet.wallet %> </span>
-            <h6><span>Bal:</span> N <%= wallet.fund  %>  </h6>
+            <h6><span>Bal: <span> &#8358; </span> </span> <%= (wallet.fund).toFixed(2) %>  </h6>
            <% }) %>   
           
         </div>

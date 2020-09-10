@@ -6,7 +6,7 @@ const transfer = mongoose.Schema({
     },
 
     amount:{
-        type: String,
+        type: Number,
         required:true
     },
 
@@ -23,21 +23,7 @@ const transfer = mongoose.Schema({
     reference:{
         type: String,
         required:true
-    },
-
-    wallet:{
-        type: String,
-        required:true
-    },
-
-    fund:{
-        type: String,
-        required:true
-    },
-    
-    createdOn:{
-        type:Date
     }
 
 });
-module.exports = mongoose.model('tranfers', transfer);
+module.exports = mongoose.model('transfer_transactions', transfer);

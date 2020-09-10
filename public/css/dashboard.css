@@ -5,7 +5,17 @@
 }
 .btn-next{
    display: flex;
-   justify-content: space-between; 
+   justify-content: space-around; 
+}
+.btn-next a i{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-next button i{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .confirm {
     display: flex;
@@ -18,4 +28,10 @@
     justify-content: center;
     flex-direction: column;
     margin-top: 50px;
+}
+.transaction-dev{
+    border-radius: 19px;
+    background-color: #131415;
+    margin-left: 10px;
+    margin-right: 10px;
 }
