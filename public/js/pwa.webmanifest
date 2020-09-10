@@ -3,18 +3,25 @@
     "name":"Mobile Wallet",
     "description":"Mobile Wallet",
     "icons":[
-
        {
-           "src":"jPay.jpg",
-           "type":"image/jpg",
+           "src":"jPayw.png",
+           "type":"image/png",
            "sizes":"96x96"
        },
-
        {
-           "src":"jPay.jpg",
-           "type":"image/jpg",
-           "sizes":"144x144"
-           
+           "src":"jPay.png",
+           "type":"image/png",
+           "sizes":"144x144"      
+       },
+       {
+            "src":"jPay.png",
+            "type":"image/png",
+            "sizes":"256x256"      
+       },
+       {
+            "src":"jPay.png",
+            "type":"image/png",
+            "sizes":"512x512"      
        }
 
     ],
