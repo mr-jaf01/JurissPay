@@ -15,24 +15,7 @@
            "type":"image/jpg",
            "sizes":"144x144"
            
-       },
-
-       {
-            "src":"jPay.jpg",
-            "type":"image/jpg",
-            "sizes":"256x256"
-        
-        },
-        {
-            "src":"jPay.jpg",
-            "type":"image/jpg",
-            "sizes":"512x512"
-            
-        }
- 
-
-
-
+       }
 
     ],
 
