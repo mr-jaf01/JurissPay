@@ -15,6 +15,11 @@ const transfer = mongoose.Schema({
         required:true
     },
 
+    credited:{
+        type: String,
+        required:true
+    },
+
     date:{
         type:Date,
         required:true
@@ -27,3 +32,4 @@ const transfer = mongoose.Schema({
 
 });
 module.exports = mongoose.model('transfer_transactions', transfer);
+

@@ -6,112 +6,68 @@
     </div>
 
    <div class="row white-text">
+
+    <% if(DebitAlert.length > 0){ %>
+        <% DebitAlert.forEach((history)=>{ %>
+         <% if(DebitAlert.credited = 'yes') { %>
+            
         <div class="transaction-dev mt-2" style="padding:20px;" >
             <div class="trn-header">
-                <p>From 888909088</p>
+                <p style="color:#ff6a14">Debited Alert</p>
             </div>
-
+            <hr >
+            
             <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
+                Your Wallet Have been Debited with
+                <span > <span> &#8358; </span> <%= (history.amount).toFixed(2) %> </span>
+                From <span style="color:#ff6a14"><%= history.fromwalletid %> </span>
+                On <span><%= history.date  %></span> 
+                   
             </div>
-
+            
             <div class="trn-footer">
-                
+                <span class="text-right"> Reference:<span style="color:#ff6a14;"><%= history.reference %></span></span>
             </div>
         </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 90978896</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
+    
+    
+    
+    
+        <% }else{ %>
+    
+            <div class="transaction-dev mt-2" style="padding:20px;" >
+                <div class="trn-header">
+                    <p style="color:#ff6a14">Debited Alert</p>
+                </div>
                 
-            </div>
-        </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 888909088</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
+                <div class="trn-body">
+                    Your Wallet Have been Debited with
+                    <span > <span> &#8358; </span> <%= (history.amount).toFixed(2) %> </span>
+                    Transfer to <span style="color:#ff6a14"><%= history.towalletid %> </span>
+                    On <span><%= history.date  %></span> 
+                       
+                </div>
                 
+                <div class="trn-footer">
+                    <span class="text-right"> Reference:<span style="color:#ff6a14;"><%= history.reference %></span></span>
+                </div>
             </div>
-        </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 888909088</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
-                
-            </div>
-        </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 888909088</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
-                
-            </div>
-        </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 888909088</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
-                
-            </div>
-        </div>
-
-        <div class="transaction-dev mt-2" style="padding:20px;" >
-            <div class="trn-header">
-                <p>From 888909088</p>
-            </div>
-
-            <div class="trn-body">
-                Payment ayment ayment ayment ayment 
-                ayment ayment ayment ayment ayment 
-            </div>
-
-            <div class="trn-footer">
-                
-            </div>
-        </div>
-       
-
+    
+    
+    
+    
+    
+        <% } %> 
+    
+        <%}); %> 
+    
+    <% }else{ %>
+    
+            <center><h4 style="color: white; margin-top:50px;">No Transactions yet!</h4></center>
+    
+    <%}%>
+        
+   
    </div>
 </div>
 <%- include('../partials/stick.ejs');  %> 

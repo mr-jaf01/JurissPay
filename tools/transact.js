@@ -19,6 +19,7 @@ const transferfunc = (req,res,fromwallet,amt)=>{
                         fromwalletid:fromwallet,
                         amount:amttosend,
                         towalletid:credRs.wallet,
+                        credited:'yes',
                         date: Date.now(),
                         reference: Date.now().toString()
                     });

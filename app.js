@@ -26,7 +26,7 @@ const transact = require('./tools/transact');
 
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
@@ -214,12 +214,13 @@ app.get('/services/transfer/jpay/success', (req,res)=>{
 app.get('/services/transactions', (req, res)=>{
     if(req.session.walletID){
         transfer_transact.find({
-            $or:[{fromwalletid:req.session.walletID},{towallet:req.session.walletID}]
-        }).then((result)=>{
-            res.render('dashboard/transaction');
+            $or:[{fromwalletid:req.session.walletID}]
+        }).sort({ date: -1}).then((result)=>{
+            res.render('dashboard/transaction', {DebitAlert:result});
         }).catch((err)=>{
             console.log(err);
-        })
+        });
+
     }else{
         res.redirect('/auth/login');
         console.log('Please Login to wallet');

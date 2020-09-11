@@ -23,3 +23,13 @@ self.addEventListener('activate', ()=>{
     console.log('service worker Activated');
 });
 
+self.addEventListener('fetch', (event)=>{
+    caches.match(event.request).then((res)=>{
+        if(res){
+            return res;
+        }else{
+            return event.request;
+        }
+    })
+});
+

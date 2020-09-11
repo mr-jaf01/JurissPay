@@ -28,6 +28,11 @@
     justify-content: center;
     flex-direction: column;
     margin-top: 50px;
+    border-radius: 19px;
+    background-color: #131415;
+    margin: 20px;
+    margin-top: 70px;
+    padding-bottom: 20px;
 }
 .transaction-dev{
     border-radius: 19px;
