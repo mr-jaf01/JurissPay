@@ -8,7 +8,7 @@ const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.PUBLIC_KEY,process.env.SECRET_KEY);
+const flw = new Flutterwave(process.env.SECRET_KEY,process.env.PUBLIC_KEY);
 
 
 
@@ -28,7 +28,7 @@ const transact = require('./tools/transact');
 
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
@@ -261,6 +261,7 @@ app.post('/services/top-up', (req,res)=>{
             "email": result.email,
             "phone_number": result.phone,
             "fullname": result.fname
+            
         }
         flw.Charge.ng(payload).then((responds)=>{
             res.redirect('/services/transfer/jpay/success?callback='+responds.message);
