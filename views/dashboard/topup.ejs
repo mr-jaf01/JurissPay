@@ -4,5 +4,44 @@
             <p class="top-nav"><a href="/dashboard" class="back-btn"><i class="fas fa-arrow-left"></i></a>| <span>Top-Up Wallet</span></p>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form id="formInput" action="/services/top-up" method="POST">
+                <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-pencil  input-prefix"></i>
+                    <input type="text" id="suffixInside1" required name="amount" class="form-control">
+                    <label  for="suffixInside1">Amount</label>
+                  </div>
+
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <i  class="fa fa-phone  input-prefix"></i>
+                    <input type="text" id="suffixInside2" required name="bnum" class="form-control">
+                    <label  for="suffixInside2">Bank Account Number</label>
+                  </div>
+
+                  <div class="md-form md-outline input-with-post-icon">
+                    <select name="bname" class="form-control">
+                        <option value="011">Firstbank</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                  </div>
+
+
+                  <div class="button">
+                    <button class="btn waves-effect btn-orange ">Top-up Now</button>
+                  </div>
+
+                  <!---
+                     <div class="button">
+                    <a style=" border-color:#ff6a14;" class="btn  btn-outline-orange waves-effect" href="/">Login</a>
+                  </div>
+                  ->
+                -->    
+            </form>
+        </div>
+    </div>
 </div>
 <%- include('../partials/stick.ejs');  %> 

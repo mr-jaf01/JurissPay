@@ -34,6 +34,11 @@ body{
     box-shadow: none;
    -webkit-box-shadow:none;
 }
+#formInput select{
+    border-color: #ff6a14; 
+    box-shadow: none;
+   -webkit-box-shadow:none;
+}
 #formInput input{
     
 }
