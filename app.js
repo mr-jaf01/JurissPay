@@ -28,7 +28,7 @@ const transact = require('./tools/transact');
 
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
