@@ -1,4 +1,5 @@
 const morx = require('morx');
+const open = require('open');
 const q = require('q');
 const encrypt = require('./encryp')
 
@@ -62,6 +63,7 @@ function service(data, _rave) {
 			var payload = {};
 			payload.public_key = _rave.getPublicKey();
 			payload.client = encrypted;
+			
 	
 			return _rave.request('v3/charges?type=card', payload)
 		})
