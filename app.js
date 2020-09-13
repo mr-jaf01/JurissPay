@@ -29,7 +29,7 @@ const transact = require('./tools/transact');
 
 const app = express();
 //app.use(enforce.HTTPS({ trustProtoHeader: true }));
-const dburl  = process.env.MONGODB_URI || 'mongodb://localhost:27017/wallet';
+const dburl  = process.env.MONGODB_URI;
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
         .then((result)=>{
@@ -252,24 +252,22 @@ app.get('/services/top-up', (req, res)=>{
 
 app.post('/services/top-up', (req,res)=>{
     wallet.findOne({wallet:req.session.walletID}).then((result)=>{
-        const payload={
-            "country": "NG",
-            "customer": "+08132911690",
-            "amount": 100,
-            "recurrence": "ONCE",
-            "type": "AIRTIME",
-            "reference": Date.now().toString()
-         }
-        flw.Bills.create_bill(payload).then((responds)=>{
+        const payload = {
+            "tx_ref": Date.now().toString(), //This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
+            "amount": req.body.amount, //This is the amount to be charged.
+            "account_bank": req.body.bname, //This is the Bank numeric code. You can get a list of supported banks and their respective codes Here: https://developer.flutterwave.com/v3.0/reference#get-all-banks
+            "account_number":req.body.bnum,
+            "currency": "NGN",
+            "email": result.email,
+            "phone_number": result.phone, //This is the phone number linked to the customer's mobile money account
+            "fullname": result.fname
+        }
+        flw.Charge.ng(payload).then((responds)=>{
             res.redirect('/services/transfer/jpay/success?callback='+responds.message);
+            console.log(responds);
         }).catch((err)=>{
             console.log(err);
         })
-
-
-
-
-
 
     }).catch((err)=>{
         console.log('Wallet Not Found');
