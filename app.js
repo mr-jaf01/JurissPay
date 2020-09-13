@@ -8,7 +8,7 @@ const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.PUBLIC_KEY,process.env.SECRET_KEY);
+const flw = new Flutterwave(process.env.PUBLIC_KEY, process.env.SECRET_KEY);
 
 
 
