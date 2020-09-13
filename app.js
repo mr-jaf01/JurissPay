@@ -8,7 +8,7 @@ const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.SECRET_KEY,process.env.PUBLIC_KEY);
+const flw = new Flutterwave(process.env.PUBLIC_KEY,process.env.SECRET_KEY);
 
 
 
@@ -252,18 +252,15 @@ app.get('/services/top-up', (req, res)=>{
 
 app.post('/services/top-up', (req,res)=>{
     wallet.findOne({wallet:req.session.walletID}).then((result)=>{
-        const payload = {
-            "tx_ref": Date.now().toString(), 
-            "amount": req.body.amount, 
-            "account_bank": req.body.bname, 
-            "account_number": req.body.bnum,
-            "currency": "NGN",
-            "email": result.email,
-            "phone_number": result.phone,
-            "fullname": result.fname
-            
-        }
-        flw.Charge.ng(payload).then((responds)=>{
+        const payload={
+            "country": "NG",
+            "customer": "+08132911690",
+            "amount": 100,
+            "recurrence": "ONCE",
+            "type": "AIRTIME",
+            "reference": Date.now().toString()
+         }
+        flw.Bills.create_bill(payload).then((responds)=>{
             res.redirect('/services/transfer/jpay/success?callback='+responds.message);
         }).catch((err)=>{
             console.log(err);

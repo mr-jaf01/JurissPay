@@ -17,7 +17,7 @@
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
     "express-sslify": "^1.2.0",
-    "flutterwave-node-v3": "^1.0.0",
+    "flutterwave-node-v3": "^1.0.2",
     "mongoose": "^5.10.2",
     "nodemailer": "^6.4.11",
     "request": "^2.88.2"
