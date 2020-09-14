@@ -24,7 +24,7 @@ const transact = require('./tools/transact');
 //-------------------------end service tolls here------------//
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 const dburl  = process.env.MONGODB_URI  || 'mongodb://localhost:27017/wallet';
 //-------db connecttion---/////
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
@@ -34,7 +34,7 @@ mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
             console.log('Cannot Connect to DBserver');
 });
 mongoose.set('useFindAndModify', false);
-//--------------------//
+//--------------------//----------------//
 
 ///-----------app middleware------------// 
 app.use(session({
@@ -198,8 +198,6 @@ app.get('/services/transfer/jpay/success', (req,res)=>{
         
     } 
 });
-
-
 //--------------- Send Money Services Routes end Here------------------------//
 
 
@@ -208,7 +206,7 @@ app.get('/services/transfer/jpay/success', (req,res)=>{
 
 
 
-//---------------services Routes here----------//
+//---------------Services Routes here----------//
 app.get('/services/transactions', (req, res)=>{
     if(req.session.walletID){
         transfer_transact.find({
@@ -236,7 +234,8 @@ app.get('/services/update', (req, res)=>{
     }
 });
 
-app.get('/services/top-up', (req, res)=>{
+app.route('/services/top-up')
+.get((req, res)=>{
     if(req.session.walletID){
         res.render('dashboard/topup');
     }else{
@@ -244,9 +243,8 @@ app.get('/services/top-up', (req, res)=>{
         console.log('Please Login to wallet');
         
     }
-});
-
-app.post('/services/top-up', (req,res)=>{
+})
+.post((req, res)=>{
     wallet.findOne({wallet:req.session.walletID}).then((result)=>{
         const payload = {
             "tx_ref": Date.now().toString(), //This is a unique reference, unique to the particular transaction being carried out. It is generated when it is not provided by the merchant for every transaction.
@@ -255,14 +253,14 @@ app.post('/services/top-up', (req,res)=>{
             "account_number":req.body.bnum,
             "currency": "NGN",
             "email": result.email,
-            "phone_number": '08036025714', //This is the phone number linked to the customer's mobile money account
-            "fullname": 'abdullahi musa muhammad'
+            "phone_number": result.phone, //This is the phone number linked to the customer's mobile money account
+            "fullname": result.fname
         }
         flw.Charge.ng(payload).then((responds)=>{
             res.redirect(responds.data['auth_url']);
-            console.log(responds);
+            //console.log(responds);
         }).catch((err)=>{
-            console.log(err);
+            res.redirect('/services/transfer/jpay/error?callback=Can Not Complete Your Transaction');
         })
 
     }).catch((err)=>{
