@@ -8,7 +8,7 @@ const { Router } = require('express');
 const lifetime = 1000 * 60 * 60 *2;
 const Sess_name = 'sid';
 const Flutterwave = require('flutterwave-node-v3');
-const flw = new Flutterwave(process.env.PUBLIC_KEY, process.env.SECRET_KEY);
+const flw = new Flutterwave(process.env.PUBLIC_KEY, process.env.SECRET_KEY, true);
 
 
 
@@ -22,10 +22,6 @@ const transfer_transact = require('./models/transfer_transact');
 const Authen = require('./tools/Authenticate');
 const transact = require('./tools/transact');
 //-------------------------end service tolls here------------//
-
-
-
-
 
 const app = express();
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
@@ -259,11 +255,11 @@ app.post('/services/top-up', (req,res)=>{
             "account_number":req.body.bnum,
             "currency": "NGN",
             "email": result.email,
-            "phone_number": result.phone, //This is the phone number linked to the customer's mobile money account
-            "fullname": result.fname
+            "phone_number": '08036025714', //This is the phone number linked to the customer's mobile money account
+            "fullname": 'abdullahi musa muhammad'
         }
         flw.Charge.ng(payload).then((responds)=>{
-            res.redirect('/services/transfer/jpay/success?callback='+responds.message);
+            res.redirect(responds.data['auth_url']);
             console.log(responds);
         }).catch((err)=>{
             console.log(err);
