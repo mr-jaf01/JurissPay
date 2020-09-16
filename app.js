@@ -24,7 +24,7 @@ const transact = require('./tools/transact');
 //-------------------------end service tolls here------------//
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 
 const dburl  = process.env.MONGODB_URI  || 'mongodb://localhost:27017/wallet';
@@ -66,11 +66,7 @@ app.use(layouts);
 
 ///------------App Route----------//////
 app.get('/', (req,res)=>{
-    if(req.session.walletID){
-        res.redirect('/dashboard');
-    }else{
-        res.render('login/login', {info:req.query.info});
-    }
+    res.redirect('/auth/login');
 });
 
 app
