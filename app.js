@@ -24,7 +24,7 @@ const transact = require('./tools/transact');
 //-------------------------end service tolls here------------//
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+//app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 
 const dburl  = process.env.MONGODB_URI  || 'mongodb://localhost:27017/wallet';
@@ -240,6 +240,8 @@ app.get('/services/update', (req, res)=>{
     }
 });
 
+
+//----------------------wallet Top-up Routes ------------------//
 app.route('/services/top-up')
 .get((req, res)=>{
     if(req.session.walletID){
@@ -260,19 +262,71 @@ app.route('/services/top-up')
             "currency": "NGN",
             "email": result.email,
             "phone_number": result.phone, //This is the phone number linked to the customer's mobile money account
-            "fullname": result.fname
+            "fullname": result.fname,
+            "redirect_url":"https://jurisspay.herokuapp.com/services/top-up/validate"
         }
         flw.Charge.ng(payload).then((responds)=>{
             res.redirect(responds.data['auth_url']);
             //console.log(responds);
         }).catch((err)=>{
-            res.redirect('/services/transfer/jpay/error?callback=Can Not Complete Your Transaction');
+            res.redirect('/services/top-up/error?callback=Can Not Complete Your Transaction');
         })
 
     }).catch((err)=>{
         console.log('Wallet Not Found');
     })
 });
+
+app.get('/services/top-up/validate', (req,res)=>{
+    if(req.session.walletID){
+        const status = req.query.status;
+        const  amount = req.query.amount;
+        if(status === 'successful'){
+            res.redirect('/services/top-up/success?amount='+amount);
+        }else{
+            res.redirect('/services/top-up/error?callback='+status);
+        }
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    }
+});
+
+app.get('/services/top-up/error', (req,res)=>{
+    if(req.session.walletID){
+       res.render('top-up/error', {info:req.query.callback});
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+});
+
+app.get('/services/top-up/success', (req,res)=>{
+    if(req.session.walletID){
+       res.render('top-up/success', {info:req.query.callback});
+    }else{
+        res.redirect('/auth/login');
+        console.log('Please Login to wallet');
+        
+    } 
+});
+
+
+
+
+//--------------------------wallet top-up Routes end here-----------------------//
+
+
+
+
+
+
+
+
+
+
 
 
 
