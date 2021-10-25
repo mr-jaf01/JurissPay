@@ -32,7 +32,7 @@ const dburl  = process.env.MONGODB_URI  || 'mongodb://localhost:27017/wallet';
 mongoose.connect(dburl, {useNewUrlParser: true, useUnifiedTopology: true })
         .then((result)=>{
             app.listen(process.env.PORT, ()=>{
-                console.log('JurissPay Server Started');
+                console.log('JurissPay Server Started and up and running');
                 console.log('connected to Database');
             });            
         }).catch((err)=>{
